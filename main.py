@@ -1,19 +1,29 @@
 from yt_dlp import YoutubeDL
 from yt_dlp.utils import DownloadError
 
+liststarts = [
+    "https://www.youtube.com/watch?v=",
+    "https://youtu.be/",
+    "https://youtube.com",
+    "https://m.youtube.com",
+    "https://www.youtube.com/shorts/",
+]
+
 def main():
     print("Welcome to my YT to MP3/MP4 Converter\n\n"
           "=====================================\n\n\n")
-
+    
     textgood = False
     while textgood == False:
         text = input("Paste your link here: ")
-        if text.startswith("https://www.youtube.com/watch?v=") or text.startswith("https://youtu.be/") or text.startswith("https://youtube.com") or text.startswith("https://m.youtube.com") or text.startswith("https://www.youtube.com/shorts/"):
-            format(text)
-            textgood = True
+        for x in liststarts:
+            if text.startswith(x):
+                format(text)
+                textgood = True
+                break
         else:
-            print("Error! Invalid Link...")
-            textgood = False
+            print("ERROR! Invalid Link...")   
+
 
 def format(text):
     formatvalid = False
@@ -48,7 +58,7 @@ def format(text):
                     error_code = ydl.download([text])
             except DownloadError:
                 print("Error when downloading...")
-            formatvalid == True
+            formatvalid = True
         else:
             print("Error! Choose an existing format...")
             formatvalid = False
