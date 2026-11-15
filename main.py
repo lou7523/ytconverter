@@ -12,9 +12,6 @@ liststarts = [
 def main():
     print("Welcome to my YT to MP3/MP4 Converter\n\n"
           "=====================================\n\n\n")
-
-    yes = 'y'
-    no = 'n'
     
     textgood = False
     downloadAgain = True
@@ -23,23 +20,23 @@ def main():
             text = input("Paste your link here: ")
             for x in liststarts:
                 if text.startswith(x):
-                    format(text)
+                    choose_format(text)
                     textgood = True
                     break
             else:
                 print("ERROR! Invalid Link...")   
-        answerDownload = input("Would you like to download another file (y/n)")
-        if answerDownload == 'y' or answerDownload == yes.capitalize():
+        answerDownload = input("Would you like to download another file (y/n): ")
+        if answerDownload.lower == 'y':
             downloadAgain = True
             textgood = False
-        elif answerDownload == 'n' or answerDownload == no.capitalize():
+        elif answerDownload.lower == 'n':
             print("Closing...")
             downloadAgain = False
             return
         else:
             print("Please choose (y/n)")
 
-def format(text):
+def choose_format(text):
     formatvalid = False
     try:
         while not formatvalid:
@@ -72,7 +69,7 @@ def format(text):
         with YoutubeDL(ydl_opts) as ydl:
             ydl.download([text])
     except DownloadError:
-        print("Error! Donwload Failed")
+        print("Error! Download Failed")
 
 if __name__ == '__main__':
     main()
