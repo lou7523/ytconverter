@@ -14,16 +14,27 @@ def main():
           "=====================================\n\n\n")
     
     textgood = False
-    while textgood == False:
-        text = input("Paste your link here: ")
-        for x in liststarts:
-            if text.startswith(x):
-                format(text)
-                textgood = True
-                break
+    donwloadAgain = True
+    while donwloadAgain == True:
+        while textgood == False:
+            text = input("Paste your link here: ")
+            for x in liststarts:
+                if text.startswith(x):
+                    format(text)
+                    textgood = True
+                    break
+            else:
+                print("ERROR! Invalid Link...")   
+        answerDownload = input("Would you like to download another file (y/n)")
+        if answerDownload == 'y' or answerDownload == 'Y':
+            donwloadAgain = True
+            textgood = False
+        elif answerDownload == 'n' or answerDownload == 'N':
+            print("Closing...")
+            donwloadAgain = False
+            return
         else:
-            print("ERROR! Invalid Link...")   
-
+            print("Please choose (y/n)")
 
 def format(text):
     formatvalid = False
